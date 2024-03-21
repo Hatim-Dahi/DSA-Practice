@@ -1,0 +1,30 @@
+class Solution {
+public:
+    ListNode* mergeInBetween(ListNode* list1, int a, int b, ListNode* list2) {
+        ListNode *prev1,*prev2, *temp=list1;
+        int count=0;
+        while (temp && count != a) {
+            prev1 = temp;
+            temp = temp->next;
+            count++;
+        }        
+        temp=list1;
+        count=0;
+         while (temp) {
+            prev2 = temp;
+            if( count == b) break;
+            cout<<prev2->val<<" ";
+            temp = temp->next;
+            count++;
+        }
+    
+        prev1->next=list2;
+        temp=list2;
+        while(temp->next){
+            temp=temp->next;
+        }
+        temp->next=prev2->next;
+
+        return list1;
+    }
+};
