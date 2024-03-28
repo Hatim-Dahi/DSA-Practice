@@ -1,0 +1,43 @@
+class Solution {
+public:
+    ListNode* reverseList(ListNode * head){
+        ListNode *prev=NULL, *curr=head, *next=NULL;
+        while(curr!=NULL){
+            next=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
+        }
+        
+        return prev;
+    }
+    ListNode* doubleIt(ListNode* head) {
+        ListNode *newhead=NULL;
+        ListNode *tail=NULL;
+
+        head=reverseList(head);
+        ListNode *temp=head;
+        int carry=0;
+        while(temp){
+            int x=temp->val*2+carry;
+            int rem=x%10;
+            carry=x/10;
+            ListNode *newNode=new ListNode(rem);
+            if(tail==NULL){
+                newhead=newNode;
+                tail=newhead;
+            }else{
+                tail->next=newNode;
+                tail=tail->next;
+            }
+            temp=temp->next;
+        }
+        if(carry){
+          ListNode *newNode=new ListNode(carry);
+          tail->next=newNode;
+          tail=tail->next;
+        }
+        newhead=reverseList(newhead);
+        return newhead;
+    }
+};
