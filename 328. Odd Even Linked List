@@ -1,0 +1,30 @@
+class Solution {
+public:
+    ListNode* oddEvenList(ListNode* head) {
+        if (!head || !head->next) {
+            return head; // No nodes or single node, no change needed
+        }
+
+        ListNode *oddHead = head;
+        ListNode *evenHead = head->next;
+        ListNode *odd = oddHead;
+        ListNode *even = evenHead;
+
+        while (even && even->next) {
+            odd->next = even->next; // Point odd's next to the next odd node
+            odd = odd->next;        // Move odd pointer to the next odd node
+            even->next = odd->next; // Point even's next to the next even node
+            even = even->next;      // Move even pointer to the next even node
+        }
+
+        // Connect the end of odd nodes to the start of even nodes
+        odd->next = evenHead;
+
+        // Ensure the end of even nodes points to null
+        if (even) {
+            even->next = nullptr;
+        }
+
+        return oddHead;
+    }
+};
