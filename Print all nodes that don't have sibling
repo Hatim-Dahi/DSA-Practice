@@ -1,0 +1,40 @@
+vector<int> noSibling(Node* root)
+{
+    vector<int>ans;
+        Node *t;
+        int insertioncount, j,x;
+        queue<Node*>q;
+        q.push(root);
+        insertioncount=1;
+        while(!q.empty()){
+            x=0;
+            j=1;
+            while(j<=insertioncount){
+                t=q.front();
+                q.pop();
+             
+                if(t->left!=NULL) {
+                    q.push(t->left);
+                    x++;
+                }
+                
+                if(t->right!=NULL) {
+                    q.push(t->right);
+                    x++;
+                }
+                if(t->left && t->right==NULL || t->left==NULL && t->right){
+                    ans.push_back(t->right? t->right->data : t->left->data);
+                }
+                
+                j++;
+            }
+            
+            insertioncount=x;
+        }
+    if (ans.empty()){
+        ans.push_back(-1);
+        return ans;
+    }
+     sort(ans.begin(), ans.end());
+     return ans;
+}
