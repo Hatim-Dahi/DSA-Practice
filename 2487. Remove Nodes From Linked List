@@ -1,0 +1,42 @@
+class Solution {
+public:
+ListNode* rev(ListNode* head){
+    ListNode *prev=NULL, *next=NULL, *curr=head;
+        while(curr!=NULL){
+            next=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;   
+}
+    ListNode* removeNodes(ListNode* head) {
+        if(head->next==NULL){
+            return head;
+        }
+        ListNode *newhead=NULL;
+        ListNode *tail=NULL;
+        ListNode*revList=rev(head);
+        int maxi=revList->val;
+        cout<<maxi<<endl;
+        ListNode *newnode=new ListNode(revList->val);
+        newhead=newnode;
+        tail=newhead;
+        ListNode*t=revList->next;
+        // ListNode*prev=revList;
+        while(t){
+            if(t->val >= maxi){
+                cout<<t->val<<" ";
+                maxi=t->val;
+                // prev->next=t;
+                // prev=t;
+                tail->next=t;
+                tail=tail->next;
+            }
+            t=t->next;
+        }
+        tail->next=NULL;
+        ListNode *finalList=rev(newhead);
+        return finalList;
+    }
+};
