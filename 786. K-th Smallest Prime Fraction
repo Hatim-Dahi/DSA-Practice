@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k) {
+        vector< pair <double,pair<int,int>>> v;
+        vector<int>ans;
+        for(int i=0;i<arr.size();i++){
+            for(int j=i+1;j<arr.size();j++){
+                double x=double(arr[i])/double(arr[j]);
+                v.push_back({x, {arr[i], arr[j]}});
+            }
+        }
+       sort(v.begin(), v.end());
+        pair<double, pair<int, int>> tempPair = v[k - 1];
+        pair<int, int> mainPair = tempPair.second;
+    
+        int firstElement = mainPair.first;
+        int secondElement = mainPair.second;
+
+        ans.push_back(firstElement);
+        ans.push_back(secondElement);
+        
+        return ans;
+    }
+};
