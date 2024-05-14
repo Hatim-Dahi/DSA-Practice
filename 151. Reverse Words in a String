@@ -1,0 +1,34 @@
+class Solution {
+    public String reverseWords(String s) {
+        int i=0;
+        while(s.charAt(i)==' '){
+            
+            i++;
+        }
+        StringBuilder temp= new StringBuilder();
+        StringBuilder ans= new StringBuilder();
+       while(i<s.length()){
+            if(s.charAt(i)==' '){
+                if(!(temp.length()==0)){
+                     System.out.println(i);
+                temp.reverse();
+                ans.append(temp);
+                ans.append(' ');
+                temp.setLength(0);
+              }
+            }else{
+                temp.append(s.charAt(i));
+            }
+            i++;
+        }
+        if(temp.length()!=0){
+            temp.reverse();
+            ans.append(temp);
+        }
+        if(ans.charAt(ans.length()-1)==' '){
+            ans.deleteCharAt(ans.length()-1);
+        }
+        ans.reverse();
+        return ans.toString();
+    }
+}
