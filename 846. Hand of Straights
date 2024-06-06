@@ -1,0 +1,33 @@
+class Solution {
+    public boolean isNStraightHand(int[] hand, int g) {
+        if (hand.length % g != 0) return false;
+        
+        TreeMap<Integer, Integer> mp = new TreeMap<>();
+       
+        // Populate the map with counts of each card
+        for (int i = 0; i < hand.length; i++) {
+            mp.put(hand[i], mp.getOrDefault(hand[i], 0) + 1);
+        }
+
+        // Process the map
+        while (!mp.isEmpty()) {
+            int first = mp.firstKey();  // Get the smallest key
+            
+            for (int i = 0; i < g; i++) {
+                int current = first + i;
+                if (!mp.containsKey(current)) {
+                    return false;  // If the required consecutive number is missing
+                }
+                // Decrement the count of the current card
+                int count = mp.get(current);
+                if (count == 1) {
+                    mp.remove(current);
+                } else {
+                    mp.put(current, count - 1);
+                }
+            }
+        }
+        
+        return true;
+    }
+}
