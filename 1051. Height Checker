@@ -1,0 +1,11 @@
+class Solution {
+    public int heightChecker(int[] h) {
+        int temp[]= h.clone();
+        Arrays.sort(temp);
+        int count=0;
+        for(int i=0;i<h.length;i++){
+            if(h[i]!=temp[i]) count++;
+        }
+        return count;
+    }
+}
