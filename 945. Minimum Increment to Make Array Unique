@@ -1,0 +1,18 @@
+class Solution {
+    public int minIncrementForUnique(int[] nums) {
+        Arrays.sort(nums);
+        int count = 0;
+        int nextUnique = nums[0];
+        
+        for (int num : nums) {
+            if (num < nextUnique) {
+                count += nextUnique - num;
+            } else {
+                nextUnique = num;
+            }
+            nextUnique++;
+        }
+        
+        return count;
+    }
+}
